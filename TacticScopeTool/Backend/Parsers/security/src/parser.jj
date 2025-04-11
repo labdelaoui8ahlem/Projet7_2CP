@@ -1,0 +1,175 @@
+options {
+  static = true;
+}
+
+PARSER_BEGIN(SecurityTacticParser)
+import java.util.ArrayList;
+import java.util.List;
+
+public class SecurityTacticParser {
+    
+    // Simplified class to represent a caller-callee relationship
+    private static class CallRelationship {
+        String caller;
+        String callee;
+        String method;
+        int position;
+        
+        public CallRelationship(String caller, String callee, String method, int position) {
+            this.caller = caller;
+            this.callee = callee;
+            this.method = method;
+            this.position = position;
+        }
+        
+        
+        public boolean isSelfCall() {
+            return caller.equals(callee);
+        }
+    }
+    
+    // State machine for pattern matching
+    private enum State {
+        LOOKING_FOR_SELF_CALL_CLIENT,
+        LOOKING_FOR_CLIENT_TO_AUTH_CALL,
+        LOOKING_FOR_FIRST_AUTH_SELF_CALL,
+        LOOKING_FOR_SECOND_AUTH_SELF_CALL,
+        PATTERN_FOUND
+    }
+    
+    // List to store all call relationships from the trace file
+    private static List<CallRelationship> callRelationships = new ArrayList<>();
+    
+    // Flag to track if tactic was detected
+    private static boolean tacticDetected = false;
+    
+    public static void main(String args[]) throws ParseException {
+        try {
+            SecurityTacticParser parser = new SecurityTacticParser(new java.io.FileInputStream("C:/Users/labde/OneDrive/Desktop/security.txt"));
+                        
+            // Parse the trace file and collect all call relationships
+            parser.ExecutionTrace();
+            
+            // Search for the security tactic pattern using state machine
+            detectAuthenticationTactic();
+            
+            if (tacticDetected) {
+                System.out.println("Authentication Tactic Detected!");
+            } else {
+                System.out.println("No Authentication Tactic Found.");
+            }
+
+        }
+        catch (Exception e) {
+          System.out.println("Parsing failed.");
+          e.printStackTrace();
+          }
+    }
+    
+    private static void detectAuthenticationTactic() {
+        // Use a state machine approach for pattern matching
+        State currentState = State.LOOKING_FOR_SELF_CALL_CLIENT;
+        String clientEntity = null;
+        String authEntity = null;
+        int startPosition = 0;
+        
+        List<CallRelationship> patternCalls = new ArrayList<>();
+        
+        for (int i = 0; i < callRelationships.size(); i++) {
+            CallRelationship call = callRelationships.get(i);
+            
+            switch (currentState) {
+                case LOOKING_FOR_SELF_CALL_CLIENT:
+                    // Step 1: Look for a self-call (potential Client)
+                    if (call.isSelfCall()) {
+                        clientEntity = call.caller;
+                        startPosition = i;
+                        patternCalls.clear();
+                        patternCalls.add(call);
+                        currentState = State.LOOKING_FOR_CLIENT_TO_AUTH_CALL;                        
+                    }
+                    break;
+                    
+                case LOOKING_FOR_CLIENT_TO_AUTH_CALL:
+                    // Step 2: Look for Client calling another entity (potential Auth)
+                    if (call.caller.equals(clientEntity) && !call.isSelfCall()) {
+                        authEntity = call.callee;
+                        patternCalls.add(call);
+                        currentState = State.LOOKING_FOR_FIRST_AUTH_SELF_CALL;
+                    } else {
+                        // Pattern broken, restart from next position after initial match
+                        i = startPosition;
+                        currentState = State.LOOKING_FOR_SELF_CALL_CLIENT;
+                    }
+                    break;
+                    
+                case LOOKING_FOR_FIRST_AUTH_SELF_CALL:
+                    // Step 3: Look for first Auth self-call
+                    if (call.caller.equals(authEntity) && call.isSelfCall()) {
+                        patternCalls.add(call);
+                        currentState = State.LOOKING_FOR_SECOND_AUTH_SELF_CALL;
+                    } else {
+                        // Pattern broken, restart from next position after initial match
+                        i = startPosition;
+                        currentState = State.LOOKING_FOR_SELF_CALL_CLIENT;
+                    }
+                    break;
+                    
+                case LOOKING_FOR_SECOND_AUTH_SELF_CALL:
+                    // Step 4: Look for second Auth self-call
+                    if (call.caller.equals(authEntity) && call.isSelfCall()) {
+                        patternCalls.add(call);
+                        currentState = State.PATTERN_FOUND;
+                        
+                        // Pattern found!
+                        tacticDetected = true;
+                        System.out.println("Client entity: " + clientEntity);
+                        System.out.println("Authenticator entity: " + authEntity);
+                       return; // Exit after finding the first occurrence
+                    } else {
+                        // Pattern broken, restart from next position after initial match
+                        i = startPosition;
+                        currentState = State.LOOKING_FOR_SELF_CALL_CLIENT;
+                    }
+                    break;
+            }
+        }
+    }
+}
+PARSER_END(SecurityTacticParser)
+
+SKIP : { "\n" | " " | "\t" | "\r" }
+
+TOKEN : { < LITERAL : (["a"-"z", "A"-"Z", "0"-"9", "_"])+ > }
+
+TOKEN : { < CALLER : "CALLER:" > }
+TOKEN : { < CALLEE : "CALLEE:" > }
+TOKEN : { < METHOD : "METHOD:" > }
+TOKEN : { < COMMA : "," > }
+TOKEN : { < SEMICOLON : ";" > }
+
+void ExecutionTrace() : 
+{
+    int position = 1;
+}
+{
+    (
+        CallStatement(position)
+        { position++; }
+    )*
+    <EOF>
+}
+
+void CallStatement(int position) : 
+{
+    Token caller, method, callee;
+}
+{
+    <CALLER> caller = <LITERAL> <COMMA>
+    <METHOD> method = <LITERAL> <COMMA>
+    <CALLEE> callee = <LITERAL> <SEMICOLON>
+    {
+        // Only store caller-callee relationship, ignore the method name
+        callRelationships.add(new CallRelationship(caller.image, callee.image, method.image, position));
+    }
+}
