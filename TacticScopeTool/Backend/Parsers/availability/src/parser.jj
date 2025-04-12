@@ -1,0 +1,177 @@
+options {
+  static = true;
+}
+
+PARSER_BEGIN(AvailabilityTacticParser)
+import java.util.ArrayList;
+import java.util.List;
+
+public class AvailabilityTacticParser {
+    
+    // Simplified class to represent a caller-callee relationship
+    private static class CallRelationship {
+        String caller;
+        String callee;
+        String method;
+        int position;
+        
+        public CallRelationship(String caller, String callee, String method, int position) {
+            this.caller = caller;
+            this.callee = callee;
+            this.method = method;
+            this.position = position;
+        }
+        
+        
+        public boolean isSelfCall() {
+            return caller.equals(callee);
+        }
+    }
+    
+    // State machine for pattern matching
+    private enum State {
+        LOOKING_FOR_PING_CALL,
+        LOOKING_FOR_OPTIONAL_NOTIFY_CALL,
+        LOOKING_FOR_OPTIONAL_HANDLE_CALL,
+        LOOKING_FOR_ECHO_CALL,
+        PATTERN_FOUND
+    }
+    
+    // List to store all call relationships from the trace file
+    private static List<CallRelationship> callRelationships = new ArrayList<>();
+    
+    // Flag to track if tactic was detected
+    private static boolean tacticDetected = false;
+    
+    public static void main(String args[]) throws ParseException {
+        try {
+            AvailabilityTacticParser parser = new AvailabilityTacticParser(new java.io.FileInputStream("C:/Users/labde/OneDrive/Desktop/trace.txt"));
+                        
+            // Parse the trace file and collect all call relationships
+            parser.ExecutionTrace();
+            
+            // Search for the security tactic pattern using state machine
+            detectPingEchoTactic();
+            
+            if (tacticDetected) {
+                System.out.println("Ping-Echo Tactic Detected!");
+            } else {
+                System.out.println("No Ping-Echo Tactic Found.");
+            }
+
+        }
+        catch (Exception e) {
+          System.out.println("Parsing failed.");
+          e.printStackTrace();
+          }
+    }
+    
+    private static void detectPingEchoTactic() {
+        // Use a state machine approach for pattern matching
+        State currentState = State.LOOKING_FOR_PING_CALL;
+        String SenderEntity = null;
+        String RecieverEntity = null;
+        String MonitorEntity = null;
+        int startPosition = 0;
+        
+        List<CallRelationship> patternCalls = new ArrayList<>();
+        
+        for (int i = 0; i < callRelationships.size(); i++) {
+            CallRelationship call = callRelationships.get(i);
+            
+            switch (currentState) {
+                case LOOKING_FOR_PING_CALL:
+                    // Step 1: no needed condition, recording caller and callee for future checking
+                        SenderEntity = call.caller;
+                        RecieverEntity = call.callee;
+                        startPosition = i;
+                        patternCalls.clear();
+                        patternCalls.add(call);
+                        currentState = State.LOOKING_FOR_OPTIONAL_NOTIFY_CALL;                        
+                    break;
+                    
+                case LOOKING_FOR_OPTIONAL_NOTIFY_CALL:
+                    // Step 2: Look for optional exception handling 
+                    if (call.caller.equals(SenderEntity) && !call.callee.equals(RecieverEntity)) {
+                        MonitorEntity = call.callee;
+                        patternCalls.add(call);
+                        currentState = State.LOOKING_FOR_OPTIONAL_HANDLE_CALL;
+                    } else {
+                        // Optional block not found, searching for the last echo call
+                        i--;
+                        currentState = State.LOOKING_FOR_ECHO_CALL;
+                    }
+                    break;
+                    
+                case LOOKING_FOR_OPTIONAL_HANDLE_CALL:
+                    // Step 3: Look for corresponding caller-callee relationship
+                    if (call.caller.equals(MonitorEntity) && call.isSelfCall()) {
+                        patternCalls.add(call);
+                        currentState = State.LOOKING_FOR_ECHO_CALL;
+                    } else {
+                        // Pattern broken, restart from next position after initial match
+                        i = startPosition;
+                        currentState = State.LOOKING_FOR_PING_CALL;
+                    }
+                    break;
+                    
+                case LOOKING_FOR_ECHO_CALL:
+                    // Step 4: Look for last potential method call in a single iteration
+                    if (call.caller.equals(RecieverEntity) && call.callee.equals(SenderEntity)) {
+                        patternCalls.add(call);
+                        currentState = State.PATTERN_FOUND;
+                        
+                        // Pattern found!
+                        tacticDetected = true;
+                        System.out.println("Ping Sender entity: " + SenderEntity + " (Exception Notifier)");
+                        System.out.println("Ping Reciever entity: " + RecieverEntity);
+                        System.out.println("Fault Monitor entity: " + MonitorEntity + " (Exception Handler)");
+                        System.out.println("First tactic occurance start at line: " + ++startPosition);
+                       return; // Exit after finding the first occurrence
+                    } else {
+                        // Pattern broken, restart from next position after initial match
+                        i = startPosition;
+                        currentState = State.LOOKING_FOR_PING_CALL;
+                    }
+                    break;
+            }
+        }
+    }
+}
+PARSER_END(AvailabilityTacticParser)
+
+SKIP : { "\n" | " " | "\t" | "\r" }
+
+TOKEN : { < LITERAL : (["a"-"z", "A"-"Z", "0"-"9", "_"])+ > }
+
+TOKEN : { < CALLER : "CALLER:" > }
+TOKEN : { < CALLEE : "CALLEE:" > }
+TOKEN : { < METHOD : "METHOD:" > }
+TOKEN : { < COMMA : "," > }
+TOKEN : { < SEMICOLON : ";" > }
+
+void ExecutionTrace() : 
+{
+    int position = 1;
+}
+{
+    (
+        CallStatement(position)
+        { position++; }
+    )*
+    <EOF>
+}
+
+void CallStatement(int position) : 
+{
+    Token caller, method, callee;
+}
+{
+    <CALLER> caller = <LITERAL> <COMMA>
+    <METHOD> method = <LITERAL> <COMMA>
+    <CALLEE> callee = <LITERAL> <SEMICOLON>
+    {
+        // Only store caller-callee relationship, ignore the method name
+        callRelationships.add(new CallRelationship(caller.image, callee.image, method.image, position));
+    }
+}
