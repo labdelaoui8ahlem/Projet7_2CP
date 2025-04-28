@@ -3,23 +3,29 @@ options {
 }
 
 PARSER_BEGIN(AvailabilityTacticParser)
+import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.ParseException;
 
 public class AvailabilityTacticParser {
-    
-    // Simplified class to represent a caller-callee relationship
-    private static class CallRelationship {
+  
+  	private InputStreamReader inputReader; 
+  	public boolean tacticFound;
+  	public boolean CorrectSyntax;
+  	public String resultOccurrences = "";
+
+   //Call class that saves caller method and callee of each method
+  	private static class CallRelationship {
         String caller;
         String callee;
         String method;
-        int position;
         
-        public CallRelationship(String caller, String callee, String method, int position) {
+        public CallRelationship(String caller, String callee, String method) {
             this.caller = caller;
             this.callee = callee;
             this.method = method;
-            this.position = position;
         }
         
         
@@ -27,73 +33,104 @@ public class AvailabilityTacticParser {
             return caller.equals(callee);
         }
     }
-    
-    // State machine for pattern matching
+
+    //Occurrence list that saves all entities, start and pattern of each occurrence of the tactic    
+     public static class Occurrence {
+          String SenderEntity;
+          String ReceiverEntity;
+          String MonitorEntity;
+          int startPosition;
+          List<CallRelationship> PatternCalls;
+
+          public Occurrence( String SenderEntity, String ReceiverEntity, int startPosition, List<CallRelationship> PatternCalls) {
+               this.SenderEntity = SenderEntity;
+               this.ReceiverEntity = ReceiverEntity;
+               this.startPosition = startPosition;
+               this.PatternCalls = new ArrayList<>(PatternCalls);
+               
+          }
+
+          public Occurrence( String SenderEntity, String ReceiverEntity, String MonitorEntity, int startPosition, List<CallRelationship> PatternCalls) {
+               this.SenderEntity = SenderEntity;
+               this.ReceiverEntity = ReceiverEntity;
+               this.MonitorEntity = MonitorEntity;
+               this.startPosition = startPosition;
+               this.PatternCalls = new ArrayList<>(PatternCalls);
+               
+          }
+
+          
+     }
+
+
+     // State machine for pattern matching
     private enum State {
         LOOKING_FOR_PING_CALL,
         LOOKING_FOR_OPTIONAL_NOTIFY_CALL,
         LOOKING_FOR_OPTIONAL_HANDLE_CALL,
         LOOKING_FOR_ECHO_CALL,
+        LOOKING_FOR_ITERATION_PING_CALL,
+        LOOKING_FOR_ITERATION_OPTIONAL_NOTIFY_CALL,
+        LOOKING_FOR_ITERATION_OPTIONAL_HANDLE_CALL,
+        LOOKING_FOR_ITERATION_ECHO_CALL,
         PATTERN_FOUND
     }
     
     // List to store all call relationships from the trace file
     private static List<CallRelationship> callRelationships = new ArrayList<>();
-    
-    // Flag to track if tactic was detected
-    private static boolean tacticDetected = false;
-    
-    public static void main(String args[]) throws ParseException {
-        try {
-            AvailabilityTacticParser parser = new AvailabilityTacticParser(new java.io.FileInputStream("C:/Users/labde/OneDrive/Desktop/trace.txt"));
-                        
-            // Parse the trace file and collect all call relationships
-            parser.ExecutionTrace();
-            
-            // Search for the security tactic pattern using state machine
-            detectPingEchoTactic();
-            
-            if (tacticDetected) {
-                System.out.println("Ping-Echo Tactic Detected!");
-            } else {
-                System.out.println("No Ping-Echo Tactic Found.");
-            }
 
+    //List to store the infos of each detected Occurrence
+      public static List<Occurrence> TotalOccurrences = new ArrayList<>();
+
+      //constructor
+      public AvailabilityTacticParser(InputStream input) {
+          this.inputReader = new InputStreamReader(input);
+          ReInit(this.inputReader);
+          try {
+            ExecutionTrace();
+            CorrectSyntax = true;
+            } catch (ParseException e){
+              CorrectSyntax = false;
+              }
         }
-        catch (Exception e) {
-          System.out.println("Parsing failed.");
-          e.printStackTrace();
-          }
-    }
-    
-    private static void detectPingEchoTactic() {
+        
+       
+        private static void detectPingEchoTactic() {
         // Use a state machine approach for pattern matching
         State currentState = State.LOOKING_FOR_PING_CALL;
         String SenderEntity = null;
-        String RecieverEntity = null;
+        String ReceiverEntity = null;
         String MonitorEntity = null;
         int startPosition = 0;
+        int itStart = 0;
         
         List<CallRelationship> patternCalls = new ArrayList<>();
+        List<CallRelationship> iterationCalls = new ArrayList<>();
+
+        boolean monitor = false;
+        boolean loop = false;
         
         for (int i = 0; i < callRelationships.size(); i++) {
             CallRelationship call = callRelationships.get(i);
             
             switch (currentState) {
                 case LOOKING_FOR_PING_CALL:
-                    // Step 1: no needed condition, recording caller and callee for future checking
+                    // Step 1: recording caller and callee for future checking          
+                    if(!call.isSelfCall()) {
                         SenderEntity = call.caller;
-                        RecieverEntity = call.callee;
+                        ReceiverEntity = call.callee;
                         startPosition = i;
                         patternCalls.clear();
                         patternCalls.add(call);
-                        currentState = State.LOOKING_FOR_OPTIONAL_NOTIFY_CALL;                        
+                        currentState = State.LOOKING_FOR_OPTIONAL_NOTIFY_CALL;
+                   }                      
                     break;
                     
                 case LOOKING_FOR_OPTIONAL_NOTIFY_CALL:
-                    // Step 2: Look for optional exception handling 
-                    if (call.caller.equals(SenderEntity) && !call.callee.equals(RecieverEntity)) {
+                    // Step 2: Look for optional exception handling
+                    if (call.caller.equals(SenderEntity) && !call.callee.equals(ReceiverEntity) && !call.isSelfCall()) {
                         MonitorEntity = call.callee;
+                        monitor = true;
                         patternCalls.add(call);
                         currentState = State.LOOKING_FOR_OPTIONAL_HANDLE_CALL;
                     } else {
@@ -108,7 +145,7 @@ public class AvailabilityTacticParser {
                     if (call.caller.equals(MonitorEntity) && call.isSelfCall()) {
                         patternCalls.add(call);
                         currentState = State.LOOKING_FOR_ECHO_CALL;
-                    } else {
+                    }  else {
                         // Pattern broken, restart from next position after initial match
                         i = startPosition;
                         currentState = State.LOOKING_FOR_PING_CALL;
@@ -117,26 +154,139 @@ public class AvailabilityTacticParser {
                     
                 case LOOKING_FOR_ECHO_CALL:
                     // Step 4: Look for last potential method call in a single iteration
-                    if (call.caller.equals(RecieverEntity) && call.callee.equals(SenderEntity)) {
-                        patternCalls.add(call);
-                        currentState = State.PATTERN_FOUND;
-                        
-                        // Pattern found!
-                        tacticDetected = true;
-                        System.out.println("Ping Sender entity: " + SenderEntity + " (Exception Notifier)");
-                        System.out.println("Ping Reciever entity: " + RecieverEntity);
-                        System.out.println("Fault Monitor entity: " + MonitorEntity + " (Exception Handler)");
-                        System.out.println("First tactic occurance start at line: " + ++startPosition);
-                       return; // Exit after finding the first occurrence
+                    if (call.caller.equals(ReceiverEntity) && call.callee.equals(SenderEntity)) {
+                         patternCalls.add(call);
+                         if ( i+1 >= callRelationships.size()) {
+                           i--;
+                           currentState = State.PATTERN_FOUND;
+                            } else {
+                              currentState = State.LOOKING_FOR_ITERATION_PING_CALL;
+                              }               
+                     } else {
+                     // Pattern broken, restart from next position after first match
+                     	i = startPosition;
+                        currentState = State.LOOKING_FOR_PING_CALL;                           
+                      }
+                  break;
+
+               case LOOKING_FOR_ITERATION_PING_CALL:
+                 //checking if other iterations exist starting from the ping call
+                 if(call.caller.equals(SenderEntity) && call.callee.equals(ReceiverEntity)) {
+                     loop = true;
+                     itStart = i-1;
+                     iterationCalls.clear();
+                     iterationCalls.add(call);
+                     currentState = State.LOOKING_FOR_ITERATION_OPTIONAL_NOTIFY_CALL; 
                     } else {
-                        // Pattern broken, restart from next position after initial match
-                        i = startPosition;
-                        currentState = State.LOOKING_FOR_PING_CALL;
-                    }
-                    break;
+                       i = i-2;
+                       currentState = State.PATTERN_FOUND;
+                     }
+                 break;
+
+               case LOOKING_FOR_ITERATION_OPTIONAL_NOTIFY_CALL:
+                 //checking if this iteration had an exception block
+                 if(!MonitorEntity.equals("null")) {
+                     if(call.caller.equals(SenderEntity) && call.callee.equals(MonitorEntity)) {
+                     iterationCalls.add(call);
+                     currentState = State.LOOKING_FOR_ITERATION_OPTIONAL_HANDLE_CALL;
+                       } else {
+                          i--;
+                          currentState = State.LOOKING_FOR_ITERATION_ECHO_CALL;
+                       }
+                   } else {
+                     if(call.caller.equals(SenderEntity) && !call.isSelfCall() && !call.callee.equals(ReceiverEntity)) {
+                       MonitorEntity = call.callee;
+                       monitor = true;
+                       iterationCalls.add(call);
+                       currentState = State.LOOKING_FOR_ITERATION_OPTIONAL_HANDLE_CALL; 
+                     } else {
+                        i--;
+                        currentState = State.LOOKING_FOR_ITERATION_ECHO_CALL;
+                     }
+                   }
+                break;
+
+               case LOOKING_FOR_ITERATION_OPTIONAL_HANDLE_CALL:
+                  if(call.caller.equals(MonitorEntity) && call.isSelfCall()) {
+                    iterationCalls.add(call);
+                    currentState = State.LOOKING_FOR_ITERATION_ECHO_CALL;
+                  } else {
+                    MonitorEntity = "null";
+                    currentState = State.PATTERN_FOUND;
+                    i = itStart-1;
+                  }              
+               break;
+
+               case LOOKING_FOR_ITERATION_ECHO_CALL:
+               	if(call.caller.equals(ReceiverEntity) && call.callee.equals(SenderEntity)) {
+               	  iterationCalls.add(call);
+               	  patternCalls.addAll(iterationCalls);
+                  currentState = State.LOOKING_FOR_ITERATION_PING_CALL;
+               	  } else {
+               	    currentState = State.PATTERN_FOUND;
+               	    i = itStart-1;
+               	    }
+               break;
+
+              case PATTERN_FOUND:
+               	if(monitor) {
+               	  TotalOccurrences.add(new Occurrence(SenderEntity, ReceiverEntity, MonitorEntity, startPosition, patternCalls));
+               	   } else {
+               	     TotalOccurrences.add(new Occurrence(SenderEntity, ReceiverEntity, startPosition, patternCalls));               	     
+               	      }
+               	currentState = State.LOOKING_FOR_PING_CALL;
+               	MonitorEntity = "null";
+               	monitor = false;
+               	loop = false;
+               break;
             }
+
+           if ( i+1 >= callRelationships.size() && loop) {
+             i--;
+             currentState = State.PATTERN_FOUND;
+             }
         }
     }
+
+		public void buildPrintedContent() {
+    		StringBuilder contentBuilder = new StringBuilder();
+    
+    		// Add number of occurrences
+    		contentBuilder.append("Tactic Detected ").append(TotalOccurrences.size()).append(" times\n");
+
+    		// Iterate over the occurrences and add details to the string
+    		for (int i = 0; i < TotalOccurrences.size(); i++) {
+        		Occurrence occ = TotalOccurrences.get(i);
+        		contentBuilder.append("\nOccurrence ").append(i + 1).append(":\n");
+        	contentBuilder.append("PingSender Entity: ").append(occ.SenderEntity).append("\n");
+        	contentBuilder.append("FaultMonitor Entity: ").append(occ.MonitorEntity).append("\n");
+        	contentBuilder.append("PingReceiver Entity: ").append(occ.ReceiverEntity).append("\n");
+
+        	int line = occ.startPosition;
+        	contentBuilder.append("Tactic started at line: ").append(++line).append("\n\n");
+
+        	for (CallRelationship call : occ.PatternCalls) {
+            	contentBuilder.append(line).append(" CALLER:").append(call.caller).append(",METHOD:").append(call.method).append(",CALLEE:").append(call.callee).append(";\n");
+           		 line++;
+        	 }
+    		}
+    	 resultOccurrences = contentBuilder.toString();
+	}
+    
+  	 public void parse() {
+        try {
+            detectPingEchoTactic();
+            if (!TotalOccurrences.isEmpty()) {
+                tacticFound = true;
+                buildPrintedContent();
+            } else {
+                tacticFound = false;
+            }
+        } catch (Exception e) {
+            tacticFound = false;
+        }
+    }
+    
 }
 PARSER_END(AvailabilityTacticParser)
 
@@ -152,17 +302,15 @@ TOKEN : { < SEMICOLON : ";" > }
 
 void ExecutionTrace() : 
 {
-    int position = 1;
 }
 {
     (
-        CallStatement(position)
-        { position++; }
+        CallStatement()
     )*
     <EOF>
 }
 
-void CallStatement(int position) : 
+void CallStatement() : 
 {
     Token caller, method, callee;
 }
@@ -171,7 +319,7 @@ void CallStatement(int position) :
     <METHOD> method = <LITERAL> <COMMA>
     <CALLEE> callee = <LITERAL> <SEMICOLON>
     {
-        // Only store caller-callee relationship, ignore the method name
-        callRelationships.add(new CallRelationship(caller.image, callee.image, method.image, position));
+        //storing caller, method and callee of each line
+        callRelationships.add(new CallRelationship(caller.image, callee.image, method.image));
     }
 }
