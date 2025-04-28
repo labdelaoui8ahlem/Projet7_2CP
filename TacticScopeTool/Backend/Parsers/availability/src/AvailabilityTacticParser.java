@@ -11,7 +11,7 @@ public class AvailabilityTacticParser implements AvailabilityTacticParserConstan
         private InputStreamReader inputReader;
         public boolean tacticFound;
         public boolean CorrectSyntax;
-        public String resultOccurrences = "";
+        public List<String> occurrenceStrings = new ArrayList<>();
 
    //Call class that saves caller method and callee of each method
         private static class CallRelationship {
@@ -246,28 +246,24 @@ public class AvailabilityTacticParser implements AvailabilityTacticParserConstan
     }
 
                 public void buildPrintedContent() {
-                StringBuilder contentBuilder = new StringBuilder();
-
-                // Add number of occurrences
-                contentBuilder.append("Tactic Detected ").append(TotalOccurrences.size()).append(" times\n");
-
                 // Iterate over the occurrences and add details to the string
                 for (int i = 0; i < TotalOccurrences.size(); i++) {
+                    StringBuilder contentBuilder = new StringBuilder();
                         Occurrence occ = TotalOccurrences.get(i);
-                        contentBuilder.append("\nOccurrence ").append(i + 1).append(":\n");
+                        contentBuilder.append("Occurrence ").append(i + 1).append(":\n\n");
                 contentBuilder.append("PingSender Entity: ").append(occ.SenderEntity).append("\n");
                 contentBuilder.append("FaultMonitor Entity: ").append(occ.MonitorEntity).append("\n");
                 contentBuilder.append("PingReceiver Entity: ").append(occ.ReceiverEntity).append("\n");
 
                 int line = occ.startPosition;
-                contentBuilder.append("Tactic started at line: ").append(++line).append("\n\n");
+                contentBuilder.append("\nStarting line ").append(++line).append("\n\n");
 
                 for (CallRelationship call : occ.PatternCalls) {
                 contentBuilder.append(line).append(" CALLER:").append(call.caller).append(",METHOD:").append(call.method).append(",CALLEE:").append(call.callee).append(";\n");
                          line++;
                  }
+                 occurrenceStrings.add(contentBuilder.toString());
                 }
-         resultOccurrences = contentBuilder.toString();
         }
 
          public void parse() {

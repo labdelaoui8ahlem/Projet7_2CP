@@ -18,9 +18,11 @@ public class Main {
             
             // Check if the tactic was found and print the results
             if (parser.tacticFound) {
-                System.out.println(parser.resultOccurrences);
+            	for(int i = 0; i < parser.occurrenceStrings.size(); i++){
+            		System.out.println(parser.occurrenceStrings.get(i));
+            	}
             } else {
-                System.out.println("Tactic Not Found.");
+            	System.out.println("Tactic Not Found.");
             }
             
         } catch (IOException e) {
