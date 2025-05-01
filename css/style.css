@@ -1,0 +1,480 @@
+body {
+    font-family: 'lato';
+    font-style: normal;
+    overflow-x: hidden;
+    margin: 0;
+   
+}
+
+
+.upload-success {
+    margin-top: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500; 
+    color: #052742;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    width: fit-content;
+    margin-left: 20px;
+    margin-right: auto;
+  }
+  
+  .upload-success h2 {
+    font-size: 24px;
+    color: #052742
+  }
+  
+  
+  
+  .upload-success p {
+    font-size: 16px;
+    color: #607D8B;
+    width: 550px;
+    left: 20px;
+  }
+  
+  .upload-success .highlight {
+    color: #f5a623;
+    font-weight: 500;
+  }
+   
+  
+.space {
+    height: 67px;
+    margin-top: 68px;
+    width: 100vw;    
+    background-color: #F1D3A7;
+}
+main {
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+    width: 100%;
+}
+.FAQ-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 72px;
+    width: 1007px;
+    place-items: center;
+}
+.FAQ-card {
+    background-color: white;
+    width: 282.41px;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    
+    border: 1px solid #FFFFFF;
+    filter: drop-shadow(0px 10px 30px rgba(226, 222, 222, 0.276));
+
+}
+.card-icon {
+    width: 35.3px;
+    height: 35.3px;
+    background: #F9EAD2;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+   
+
+.card-icon img {
+    width: 17.65px;
+    height: 17.65px;
+    left: 8.83px;
+    top: 8.83px;
+
+}
+.FAQ-content h3 {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0;
+    
+    color: rgba(3, 26, 57, 0.75);
+
+}
+.FAQ-content p {
+    font-family: 'Inter', sans-serif;  
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: #647489;
+    margin: 0;
+}
+
+.history-txt{
+    margin-left: 20px;
+}
+
+
+.Analysis-icon img{
+    width: 357.1699523925781px;
+    height: 41.67017364501953;
+    position: relative;
+    margin-top:120px;
+    margin-bottom: 0px;
+    margin-left: 120px;
+    
+}
+
+
+.upload-box {
+    box-sizing: border-box;
+    background: #e8ecf4;
+    position: relative;
+    margin-left: 100px;
+    
+    border: 1px solid #F1F1F2;
+    box-shadow: 0px 5px 13px rgba(13, 30, 115, 0.12);
+    border-radius: 4px;
+    padding: 16px;
+    gap: 12px;
+    width: 600px;
+    margin: 0 auto; /* centers it */
+  }
+  .upload-box {
+    margin-left: 120px; 
+        margin-top: 80px;
+  }
+  
+  
+
+
+  .upload-icon {
+    margin-right: 0px; 
+  }
+  
+ 
+
+@media (max-width: 768px) {
+    .FAQ-section {
+        padding: 60px 20px;
+    }
+    .navbar {
+        padding: 0 20px;
+        justify-content: center;
+    }
+    .nav-list {
+        flex-direction: column;
+        position: absolute;
+        align-items: center;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        display: none;
+        padding: 20px 0;
+        background-color: #052742;
+        overflow: hidden;
+
+    }
+    
+    .nav-list.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+        max-height: 500px;
+    }
+    .menu-toggle {
+        display: relative;
+        cursor: pointer;
+        top: 10px;
+       }
+
+    .upload-success {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: fit-content;
+  margin-left: 120px;
+  margin-right: auto;
+}
+
+.upload-success h2 {
+  font-size: 24px;
+  color: #263238;
+}
+
+.check-icon {
+  color: green;
+  font-size: 26px;
+  margin-right: 5px;
+}
+
+
+.upload-success p {
+  font-size: 16px;
+  color: #607D8B;
+}
+
+
+
+.tactic-buttons {
+  margin: 20px 0;
+}
+
+.tactic-btn {
+  border: 2px solid #f5a623;
+  border-radius: 30px;
+  padding: 10px 20px;
+  background-color: white;
+  color: #f5a623;
+  font-weight: 500;
+  margin: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tactic-btn.selected,
+.tactic-btn:hover {
+  background-color: #f5a623;
+  color: white;
+}
+
+.start-analysis-btn {
+  margin-top: 15px;
+  padding: 12px 25px;
+  border: 2px solid #0277BD;
+  border-radius: 50px;
+  background-color: white;
+  color: #0277BD;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.start-analysis-btn:hover {
+  background-color: #0277BD;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+}
+
+.upload-success {
+    margin-left: 120px;
+}
+
+  
+  .tactic-btn {
+    border: 2px solid #f5a623;
+    border-radius: 30px;
+    padding: 10px 20px;
+    background-color: white;
+    color: #f5a623;
+    font-weight: 500;
+    margin: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .tactic-btn.selected,
+  .tactic-btn:hover {
+    background-color: #f5a623;
+    color: white;
+  }
+  
+  .start-analysis-btn {
+    margin-top: 15px;
+    margin-left: 130px;
+    padding: 12px 25px;
+    border-radius: 50px;
+    background-color: white;
+    color: #007a87;
+    border: 2px solid #007a87;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .start-analysis-btn:hover {
+    background-color: #007a87;
+    color: white;
+  }
+   
+  .Analyse-paragraph {
+  
+  width: 312px;
+  height: 28px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 28px;
+  margin-top:-29px;
+  margin-bottom: 0px;
+  margin-left: 205px ;
+  
+  color: #052742;
+  
+  }
+  
+  .tool-description img{
+    height: 44px;
+    width: 460px;
+    margin-left: 120px;
+    margin-top: 15px;
+   }
+  
+  
+  .remark-icon img{
+    width: 20px;
+    height: 31px;
+    position: relative;
+    margin-top:250px;
+    margin-bottom: 0px;
+    margin-left: 35px ;
+    left: 9px;
+    top: 9px;
+  }
+  
+  .remark-icon img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .note-header {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* space between icon and NOTE */
+    margin-bottom: 8px;
+  }
+  
+  .note-header img {
+    width: 20px;
+    height: 31px;
+  }
+  
+  .note-title {
+    font-weight: 600;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    color: #0C2D58;
+  }
+  
+  
+  
+  .Submit-button {
+    margin-left: 900px;
+    margin-top: 40px;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    color: white;
+    background-color: #DFA449;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 24px; 
+    cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(58, 87, 232, 0.3);
+  
+  }
+  
+  .upload-btn {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 75px;
+    margin-left: 275px;
+    justify-content: center;
+    width: 251px;
+    height: 72px;
+    border: 2px solid #06798F;
+    border-radius: 100px;
+    color : #06798F;
+    background-color: white;
+    font-family: sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007a87;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  
+  .highlight {
+    color: #f5a623;
+    font-weight: 500;
+  }
+  
+  .check-icon {
+    color: green;
+    font-size: 26px;
+    margin-right: 5px;
+  }
+  
+  
+  .tactic-buttons {
+    margin: 20px 0;
+  }
+  
+ 
+  .results-txt{
+      margin-top: 50px;
+  }
+  .results-icon{
+    margin-bottom: 20px;
+    margin-top : 50px;
+    height: 15px;
+    width: 15px;
+  }
+  
+  .results-header {
+      display: flex;
+      align-items: center;
+      margin-top: 80px;
+      margin-left: 35px;
+    }
+    
+    .icon-container {
+      margin-right: 15px;
+    }
+    
+    .icon-container img {
+      width: 35px;
+      margin-top: 20px;
+      margin-right: 0;
+      margin-left: 7px;
+      height: 40px;
+      margin-bottom: 15px;
+    }
+    
+    .results-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 38px;
+      line-height: 28px;
+      color: #052742;
+      margin: 0;
+    }
+    .hidden {
+      display: none !important;
+    }
