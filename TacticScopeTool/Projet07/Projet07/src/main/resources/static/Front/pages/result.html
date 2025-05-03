@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>TOOL</title>
+  <link rel="icon" type="image/png" href="../assets/icons/tactscope.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/result-page.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Lato&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+
+<nav class="navbar">
+  <div class="menu-toggle">&#9776;</div>
+  <ul class="nav-list">
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="FAQ.html" class="nav-link">FAQ</a></li>
+    <li><a href="Tool.html" class="nav-link">Tool</a></li>
+    <li><a href="Documentation.html" class="nav-link">Documentation</a></li>
+    <li><a href="AboutUs.html" class="nav-link">About us</a></li>
+  </ul>
+</nav>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="top-row">
+      <a href="Tool.html" class="logo-container">
+        <img src="../assets/icons/tactcope.svg" alt="TactScope Logo" class="sidebar-logo" >
+        <img src="../assets/icons/logoname.svg" alt="TactScope Name" class="sidebar-name" >
+      </a>
+      <spanimg class="close-btn" id="closeBtn"><img src="../assets/image/4layers-icon.png" height="25" width="25"></span>
+    </div>
+    <h1 class="history-title">History</h1>
+    <div class="search-box">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="5" cy="5" r="3"></circle>
+        <line x1="15" y1="15" x2="9" y2="9"></line>
+      </svg>
+      <input type="text" placeholder="Search" />
+    </div>
+  </div>
+
+  <strong>Performance</strong>
+<ul id="performanceList" class="history-list">
+  <li class="empty-msg">No previous analysis</li>
+</ul>
+
+<strong>Security</strong>
+<ul id="securityList" class="history-list">
+  <li class="empty-msg">No previous analysis</li>
+</ul>
+
+<strong>Availability</strong>
+<ul id="availabilityList" class="history-list">
+  <li class="empty-msg">No previous analysis</li>
+</ul>
+  </div>
+  
+</div>
+
+
+<a  href="Tool.html">
+  <img src="../assets/icons/logo-complet.png" class="responsive-logo" alt="TactScope Logo">
+</a>
+
+<img src="../assets/icons/results-icon.png" style="position: absolute; left: 120px; top: 120px; bottom: 40px; right: 120px;" alt="Results" width="207" height="53.19999694824219">
+
+
+
+
+<!-- Tactic Overview -->
+<section class="tactic-overview">
+  <h2>Tactic Overview</h2>
+  <p><strong>Tactic name &nbsp;&nbsp; </strong> <span id="tactic-name"></span></p>
+  <p style="width: 400px; ">
+    <strong>Goal &nbsp; &nbsp; &nbsp;&nbsp;</strong>
+     <span id="tactic-goal"></span></p>
+</section>
+
+<!-- Detection Summary -->
+<section class="detection-summary">
+  <h2>Detection Summary</h2>
+  <p><strong>Frequency&nbsp;&nbsp;</strong> <span id="occurrence-count">0</span> Times</p>
+  <div id="occurrence-list"></div>
+</section>
+
+<!-- Impact -->
+<section class="impact">
+  <h2>Impact</h2>
+  <ul id="impact-list"></ul>
+</section>
+
+<!-- Export -->
+<section class="export">
+  <h2>Export</h2>
+  
+  <div class="export-controls">
+    <label for="export-type" class="export-label">Export as: &nbsp; &nbsp;</label>
+    <select id="export-type" class="custom-select">
+      <option value="json">JSON</option>
+      <option value="txt">.TXT</option>
+    </select>
+  </div>
+
+  <div class="export-buttons">
+    <button class="export-btn">Export</button>
+    <button id="get-new-analysis" class="get-analysis-btn">
+      Get New Analysis <span class="arrow">&rarr;</span>
+    </button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+      <div class="logo-section">
+          <div class="logo-and-name">
+              <img src="../assets/icons/tactcope.svg" alt="">
+              <img src="../assets/icons/logoname.svg" alt="">
+          </div>
+          <p>
+              This tool helps analyze execution traces to detect architectural tactics using JavaCC.
+          </p>
+      </div>
+      <div class="links-section">
+          <h4>Quick Links</h4>
+          <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="FAQ.html">FAQ</a></li>
+              <li><a href="#">Analyze</a></li>
+              <li><a href="#">How it works</a></li>
+              <li><a href="Documentation.html">Documentation</a></li>
+            </ul>
+            
+      </div>
+      <div class="contact-section">
+          <h4>Contacts us</h4>
+        
+          <div class="contact-items">
+            <svg width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.6894 2.94946V11.2828C17.6894 11.8353 17.4699 12.3652 17.0792 12.7559C16.6885 13.1466 16.1586 13.3661 15.606 13.3661H3.10604C2.5535 13.3661 2.0236 13.1466 1.6329 12.7559C1.2422 12.3652 1.02271 11.8353 1.02271 11.2828V2.94946" stroke="#170F49" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M17.6894 2.94954C17.6894 2.39701 17.4699 1.86711 17.0792 1.47641C16.6885 1.0857 16.1586 0.866211 15.606 0.866211H3.10604C2.5535 0.866211 2.0236 1.0857 1.6329 1.47641C1.2422 1.86711 1.02271 2.39701 1.02271 2.94954L8.25187 7.46343C8.58298 7.67038 8.96558 7.7801 9.35604 7.7801C9.7465 7.7801 10.1291 7.67038 10.4602 7.46343L17.6894 2.94954Z" stroke="#170F49" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <a class="G-mail" href="mailto:ns_hachache@esi.dz">ns_hachache@esi.dz</a>
+          </div>
+        
+          <div class="contact-items">
+            <img src="../assets/image/Phone.svg" alt="">
+            <a class="phone" href="tel:+213696567744">+213 696567744</a>
+          </div>
+        
+          <div class="contact-items">
+            <img src="../assets/image/location-icon.svg" alt="" width="20" height="20">
+            <a class="location" href="https://www.google.com/maps/place/Ecole+Nationale+Sup%C3%A9rieure+d'Informatique+(Ex.+INI)/data=!4m2!3m1!1s0x0:0x215c157a5406653c?sa=X&ved=1t:2428&ictx=111" target="_blank">
+              Ecole Nationale Supérieure d'Informatique Oued Smar, Alger
+            </a>
+          </div>
+        </div>
+        
+
+
+         
+      </div>
+  </div>
+  <div class="footer-bottom">
+      <p class="copyright"> &copy; 2025</p>
+      <p class="rights">Open Source Project | Created as part of 2nd year course &#45; 2025 | <a href="https://github.com" target="_blank">Open Source</a></p>
+  </div>
+</footer>
+
+
+<!-- JS for dynamic content -->
+
+
+<script src="../js/results.js"></script>
+<script src="../js/sidebar.js"></script>
+<script src="../js/footer.js"></script>
+</body>
+</html>
