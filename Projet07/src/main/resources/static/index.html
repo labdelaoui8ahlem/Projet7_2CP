@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+          <title>Home</title>
+          <meta charset="utf-8">
+        <link rel="icon" type="image/png" href="./assets/image/tactcope.svg">
+          <link rel="stylesheet" href="./css/style.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"  />
+          <link rel="stylesheet" href="./css/footer.css">
+          <link rel="stylesheet" href="./css/navbar.css">
+
+          
+    </head>
+    <body>
+         <!--Placeholder for Navbar -->
+        <div id="navbar-placeholder"></div>
+
+                 <!-- Heading -->
+        <div class="content">
+            <div class="heading">
+                <h1>
+                    <span class="reveal">Reveal </span>
+                    <span class="architectural">Architectural <span class="patterns">Patterns</span></span>
+                    <span class="hidden"> Hidden</span><br>
+                    <span class="trace">in Your Execution Traces</span> <span class="using">using</span> 
+                    <span class="javacc">JavaCC</span> <br> 
+                    <span class="powered">Powered</span> 
+                    <span class="tool">Tool</span>
+                </h1>
+            </div>
+    
+            <div class="description">
+                <p>Upload execution traces and automatically uncover architectural tactics using JavaCC-powered<br> parsers and UML sequence diagrams.</p>
+            </div>
+             
+
+            <div class="actions-container">
+                <!-- Button Section -->
+                <button class="try-button" onclick="location.href='Tool.html'">
+                    <span class="label">Try Now →</span>
+                </button>
+                <!-- See How It Works Link -->
+                <a href="Documentation.html" class="how-it-works">See How It Works</a>
+            </div>
+            
+            <div class="features">
+              <div class="feature-item">
+                  <i class="fa-solid fa-check"></i>
+                  <div class="feature-text first">Detects architectural tactics like PingEcho and more.</div>
+              </div>
+          
+              <div class="feature-item">
+                  <i class="fa-solid fa-check"></i>
+                  <div class="feature-text second">Open Source</div>
+              </div>
+          
+              <div class="feature-item">
+                  <i class="fa-solid fa-check"></i>
+                  <div class="feature-text third">Fast and Accurate results</div>
+              </div>
+          </div>
+          
+
+
+            
+            
+            
+        </div>
+
+              <div class="before-tool"></div> <!-- Empty spacer before tool section -->
+
+              <div class="tool-section">
+                <div class="text-container">
+                  <h2 class="tool-title">What Can Our Tool Do for You?</h2>
+                  <p class="tool-description">
+                    Upload your execution trace files and automatically<br>
+                    detect architectural tactics like PingEcho or ID <br> 
+                    Password. Our JavaCC-based parser delivers fast,<br>
+                    reliable results you can export for further analysis or<br>
+                    documentation  making architecture insights simple<br>
+                    and accessible.
+                  </p>
+                </div>
+                
+                <div class="tool-image-container">
+                  <img src="./assets/image/image 4 (2) (1).png" alt="Results Overview" class="tool-image">
+                </div>
+              </div>
+             
+
+
+              <section id="faq-section">
+                <h1>FAQ</h1>
+                <div class="FAQ-box">
+                    <div class="FAQ-card">
+                        <div class="card-icon">
+                            <img src="./assets/icons/Mechanistic Analysis.svg" alt="">
+                            </div>
+                        <div class="FAQ-content">
+                        <h3>
+                            Which architectural tactics are detected?                    </h3>
+                        <p>
+                            Right now, the tool supports detection of several common tactics such as PingEcho, Maintain Multiple Copies, and Id Password. We plan to expand this list as the tool evolves.
+                        </p>
+                        </div>
+                    </div>
+                    <div class="FAQ-card">
+                        <div class="card-icon">
+                            <img src="./assets/icons/TXT.svg" alt="">
+                            </div>
+                        <div class="FAQ-content">
+                        <h3>
+                            What kind of files can I upload?
+                        </h3>
+                        <p>
+                            You can upload plain text files that contain execution traces. Just make sure the file has a correct structure as provided in the uploading page so the parser can do its job effectively.
+                        </p>
+                        </div>
+                    </div>
+                    <div class="FAQ-card">
+                        <div class="card-icon">
+                            <img src="./assets/icons/Secure.svg" alt="">
+                            </div>
+                        <div class="FAQ-content">
+                        <h3>
+                            What happens to my files after upload?                    </h3>
+                        <p>
+                            Your file is only used temporarily during the analysis and is not stored afterward. Your data stays private and secure.
+                        </p>
+                        </div>
+                    </div>
+                    <div class="FAQ-card">
+                        <div class="card-icon">
+                            <img src="./assets/icons/Development Skill.svg" alt="">
+                            </div>
+                        <div class="FAQ-content">
+                        <h3>
+                            Who is this tool for?                    </h3>
+                        <p>
+                            It's great for developers, students, software architects, or anyone working with execution traces who wants quick and clear architectural insights — without doing all the heavy lifting manually.
+                        </p>
+                        </div>
+                    </div>
+                    <div class="FAQ-card">
+                        <div class="card-icon">
+                            <img src="./assets/icons/Export.svg" alt="">
+                            </div>
+                        <div class="FAQ-content">
+                        <h3>
+                            Can I export the results?                    </h3>
+                        <p>
+                            Absolutely! Once your trace is analyzed, you can export the results either as a JSON file , TXT file or a PDF file to use in reports, documentation, or further analysis.
+                        </p>
+                        </div>
+                    </div>
+                    <div class="FAQ-card">
+                        <div class="card-icon">
+                            <img src="./assets/icons/Insert.svg" alt="">
+                            </div>
+                        <div class="FAQ-content">
+                        <h3>
+                            Do I need to install anything?                    </h3>
+                        <p>
+                            Not at all, our tool runs entirely in your browser. Just upload your trace file and get a detailed analysis on your implemented architectural tactics automatically!
+                        </p>
+                        </div>
+                    </div>
+                </div>    
+            </section>
+            
+            <div id="footer-container"></div>
+            <script src="./js/footer.js"></script>
+            <script src="./js/navbar.js"></script>
+            <script src="./js/script.js"></script>
+            
+
+
+              
+            
+
+              
+              
+
+</body>
+</html>

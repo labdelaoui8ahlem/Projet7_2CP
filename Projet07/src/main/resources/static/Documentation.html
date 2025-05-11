@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+        <title>Documentation</title>
+        <link rel="icon" type="image/png" href="./assets/image/tactcope.svg">
+        <link rel="stylesheet" href="./css/documentation.css">
+        <link rel="stylesheet" href="./css/navbar.css">
+        <link rel="stylesheet" href="./css/footer.css">
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Lato&family=Poppins&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <!--Placeholder for Navbar -->
+        <div id="navbar-placeholder"></div>
+        <!--Main CONTENT -->
+        <main>
+            <div class="purpose-text">
+            <h1>
+                What Makes Our Tool Valuable?
+            </h1>
+            <p>
+                Our tool helps software architects automatically detect architectural tactics from execution traces. By using grammar-based parsing with JavaCC, it offers fast and reliable analysis of system behavior—focusing on key quality attributes like performance, availability, and security.
+            </p>
+            </div>
+            <div id="how-works" class="how-works">
+            <h2>How It Works ?</h2>
+            <div class="steps">
+                <div class="circle-step">
+                    <img class="circle2" src="./assets/icons/big-circle.svg" alt="">
+                    <img class="circle1" src="./assets/icons/small-circle.svg" alt="">
+                    
+                    <h1>01</h1>
+                    <h3>Step</h3>
+                    <img class="circle3" src="./assets/icons/small-circle.svg" alt="">
+                    <div class="step-text">
+                        <h2>Upload execution trace</h2> 
+                <p>Upload a .txt file containing the method call sequence.</p>       
+                    </div>
+                </div>          
+                <div class="circle-step">
+                    <img class="circle2" src="./assets/icons/big-circle.svg" alt="">
+                  <img class="circle1" src="./assets/icons/small-circle.svg" alt="">
+                  <h1>02</h1>
+                  <h3>Step</h3>
+                  <img class="circle3" src="./assets/icons/small-circle.svg" alt="">
+                  <div class="step-text">
+                    <h2>Process the file</h2> 
+                    <p>The system uses tactic-specific grammar to interpret the trace.</p>       
+                  </div>
+                  
+                </div>          
+                <div class="circle-step">
+                    <img class="circle2" src="./assets/icons/big-circle.svg" alt="">
+                    <img class="circle1" src="./assets/icons/small-circle.svg" alt="">
+                   
+                    <h1>03</h1>
+                    <h3>Step</h3>
+                    <img class="circle3" src="./assets/icons/small-circle.svg" alt="">
+                    <div class="step-text">
+                        <h2>Detect Tactics</h2> 
+                    <p>The parser detects patterns of architectural tactics.</p>       
+                     </div>          
+                </div>
+                <div class="circle-step">
+                    <img class="circle2" src="./assets/icons/big-circle.svg" alt="">
+                    <img class="circle1" src="./assets/icons/small-circle.svg" alt="">
+                    <h1>04</h1>
+                    <h3>Step</h3>
+                    <img class="circle3" src="./assets/icons/small-circle.svg" alt="">
+                    <div class="step-text">
+                        <h2>Show Results</h2> 
+                        <p>Matched tactics are displayed in diagrams and reports</p>       
+                    </div>
+                    
+                </div>          
+            </div>
+            </div>
+            <div class="question-box">
+                <h1>Prerequisites for Using the Tool</h1>
+                <div class="question-grid">
+                    <div class="question-container">
+                        <div class="question">What is an architectural tactic?</div>
+                        <div class="answer">
+                            <p>An architectural tactic is a software design choice that helps improve a system’s quality attributes like performance, availability, or security. Tactics are small, reusable strategies that can be combined to form larger architectural solutions.</p>
+                        </div>  
+                    </div>
+                    <div class="question-container">
+                        <div class="question">What does it mean XPG ?</div>
+                        <div class="answer">
+                            <p>An XPG (Extended Parsing Grammar) is a way to describe the structure of a sequence diagram in a formal grammar format. It includes rules and relationships (like who calls who) and is used to generate JavaCC parsers that can analyze execution traces.</p>
+                        </div>  
+                    </div>
+                    <div class="question-container">
+                        <div class="question">What is an execution trace ?</div>
+                        <div class="answer">
+                            <p>An execution trace is a file that logs the method calls (or function executions) that happened during a program’s run. It’s used to understand the behavior of a system and to detect patterns like architectural tactics.</p>
+                        </div>  
+                    </div>
+                    <div class="question-container">
+                        <div class="question">What is the role of UML sequence diagrams ?</div>
+                        <div class="answer">
+                            <p>A UML sequence diagram visually shows how objects interact over time. It represents method calls between components, highlighting the order of interactions. These diagrams are the basis for generating grammar rules in your system.</p>
+                        </div>
+                    </div>
+                    <div class="question-container">
+                        <div class="question">What is parser in this context ?</div>
+                        <div class="answer">
+                            <p>A parser is a program generated by JavaCC that reads an execution trace and checks whether it follows the structure defined by a specific XPG grammar.
+
+                                In your tool, each parser corresponds to one architectural tactic (e.g. Ping/Echo). It scans the uploaded .txt file and looks for specific patterns of method calls that match the grammar — confirming whether the tactic is present or not.</p>
+                        </div>
+                    </div>
+                    <div class="question-container">
+                        <div class="question">What is JavaCC?</div>
+                        <div class="answer">
+                            <p>JavaCC is a tool that generates lexical analyzers and parsers from grammar specifications. It is used here to build tactic-specific parsers from XPG grammar rules.</p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </main>
+        <div id="footer-container"></div>
+        <script src="./js/navbar.js"></script>
+        <script src="./js/script.js"></script>
+        <script src="./js/footer.js"></script>
+    </body>
+</html>

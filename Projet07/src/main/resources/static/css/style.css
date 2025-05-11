@@ -1,0 +1,416 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+
+
+
+
+
+/* //////////////////////////////////////////////// */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Container for the header section */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    /* gap: 32px;  */
+    width: 1052px;
+    height: 426px;
+    margin: 0 auto;
+    padding: 132px 0  0 0;
+
+}
+
+/* Container of the H1 */
+.heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 48px; 
+    width: 1052px;
+    height: 216px;
+}
+
+/* Main title (global style) */
+.heading h1 {
+    width: 862px;
+    height: 216px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 300; /* Light */
+    font-size: 46px;
+    line-height: 72px; /* or 157% */
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #0C2D58;
+    margin: 0; /* No margins */
+}
+
+/* Styling for "Architectural" and "Patterns" words */
+.heading h1 .architectural,
+.heading h1 .patterns {
+    font-weight: 500; /* Medium */
+    font-style: normal;
+    text-decoration: underline;
+    color: #DFA449;
+}
+
+/* Styling for "JavaCC" and "Powered" words */
+.heading h1 .javacc, .heading h1 .powered {
+    font-weight: 700;
+    font-style: normal;
+    color: #0C2D58;
+}
+
+.description{
+    margin-top: 18px;
+    margin-bottom: 32px;
+}
+
+/* Text inside the description */
+.description p {
+    width: 773px;
+    height: 60px;
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px; /* 167% */
+    text-align: center;
+    color: rgba(3, 26, 57, 0.75);
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0; /* Remove default paragraph margins */
+}
+
+
+
+
+/* Container for the actions section */
+.actions-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    width: 320px;
+    height: 52px;
+    /* margin: 0 auto; /* Centering if necessary */
+    /* margin-bottom: 20px; */ 
+    margin: 0  auto 20px auto;
+}
+
+/* Button styles */
+.try-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 32px;
+    gap: 6px;
+    width: 159px;
+    height: 52px;
+    background: #DFA449;
+    box-shadow: 0px 1px 2px rgba(20, 28, 104, 0.63);
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.try-button:active {
+    background: #FFFFFF;
+    color: #DFA449;
+    border: 2px solid #DFA449;
+}
+
+.try-button:active .label {
+    color: #DFA449;
+}
+/* Text inside the button */
+.try-button .label {
+    width: 95px;
+    height: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px; /* identical to box height, or 111% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: capitalize;
+    color: #FFFFFF;
+}
+
+/* See How It Works section */
+.how-it-works {
+    width: 137px;
+    height: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px; /* identical to box height, or 150% */
+    text-decoration-line: underline;
+    color: #DFA449;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.how-it-works:hover {
+    color: #C78C2C; /* Slightly darker shade on hover */
+
+
+}
+.how-it-works:active {
+    text-decoration: none;
+}
+
+.features {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 32px; /* Espace entre chaque bloc (icone + texte) */
+    width: 100%;
+    height: auto;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0 auto;
+    margin-bottom: 96px;
+    flex-wrap: nowrap; /* Interdire les retours à la ligne */
+    overflow-x: auto;  /* Ajouter un scroll horizontal si nécessaire */
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px; /* Espace entre icône et texte */
+    white-space: nowrap; /* Empêcher le texte de se couper sur une nouvelle ligne */
+}
+
+.feature-item i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 24px;
+    font-size: 22px;
+    color: #DFA449;
+}
+
+.feature-text {
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    color: #0C2D58;
+    white-space: nowrap; /* Le texte reste sur une seule ligne */
+}
+
+.feature-text.first {
+    width: 372px;
+}
+
+.feature-text.second {
+    width: 92px;
+}
+
+.feature-text.third {
+    width: 175px;
+}
+
+
+/* Before Tool Section (spacer) */
+  .before-tool {
+    margin-bottom:96px;
+}  
+
+/* Tool section layout */
+.tool-section {
+    margin-top: 96px;
+    position: relative;
+    width: 1052px;
+    height: 445px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Text container */
+.text-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 36px;
+    width: 535px;
+    height: 288px;
+    left: 0;
+    top: 0;
+}
+
+/* Title */
+.tool-title {
+    width: 535px;
+    height: 72px;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 72px;
+    text-align: center;
+    letter-spacing: -0.02em;
+    color: #0C2D58;
+    margin: 0;
+}
+
+/* Paragraph */
+.tool-description {
+    width: 466px;
+    height: 180px;
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    color: rgba(3, 26, 57, 0.75);
+    margin: 0;
+}
+
+/* Image Container (positioned image) */
+.tool-image-container {
+    position: absolute;
+    left: 577.35px;
+    top: 5px;
+}
+
+/* Image styling */
+.tool-image {
+    width: 537.23px;
+    height: 467.77px;
+    background: url('image.png') no-repeat center center / cover;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    transform: rotate(5.68deg);
+}
+
+
+
+section {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+    width: 992px;
+    max-width: 100%;
+    margin-top: 96px;;
+}
+section h1 {
+    font-family: 'Poppins',sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 72px;
+    color: #0C2D58;
+    margin-bottom: 49px;
+}
+.FAQ-box {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 72px;
+    margin-bottom: 72px;
+  
+}
+.FAQ-card {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border: 1px solid #FFFFFF;
+    border-radius: 6px;
+    filter: drop-shadow(0px 10px 30px rgba(226, 222, 222, 0.276));
+    transition: all 0.5s ease;
+    cursor: pointer;
+
+}
+.FAQ-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+.FAQ-card::before {
+    content: '';
+    background: linear-gradient(0deg, transparent, transparent 30%, rgba(249, 234, 210,0.3));
+    transform: rotate(-45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+.FAQ-card:hover::before {
+    opacity: 1;
+    transform: rotate(-45deg) translateY(100%);
+}
+.card-icon {
+    margin: 13px 16px 13px 16px;
+    width: 35.3px;
+    height: 35.3px;
+    background: rgb(249, 234, 210);
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+   
+
+.card-icon img {
+    width: 17px;
+    height: 18px;
+
+
+}
+.FAQ-content {
+    margin: 0 16px 5px 16px;
+    width: 250.4px;
+}
+.FAQ-content h3 {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.03em;
+    margin: 0;
+    color: rgba(3, 26, 57, 0.75);
+
+}
+.FAQ-content p {
+    font-family: 'Inter';  
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    color: #647489;
+    margin: 16.5px 0 16.5px 0;
+}
+
+
