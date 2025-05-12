@@ -40,33 +40,25 @@ Avant de commencer, veuillez installer :
 
 ### 🔧 IntelliJ IDEA
 
--   Ouvrez IntelliJ, puis allez dans ***Fichier → Ouvrir\...*\
-    > **
+-   Ouvrez IntelliJ, puis allez dans ***Fichier → Ouvrir\...***
 
--   Naviguez jusqu\'au dossier Projet7_2CP/TacticScopeTool/Projet07
+-   Naviguez jusqu\'au dossier ***Projet7_2CP/TacticScopeTool/Projet07***
 
--   IntelliJ devrait détecter automatiquement le projet Maven. Sinon,
-    > cliquez sur ***Importer projet Maven***
+-   IntelliJ devrait détecter automatiquement le projet Maven. Sinon, cliquez sur ***Importer projet Maven***
 
--   Ouvrez Projet07Application.java, faites un clic droit → ***Exécuter
-    > Votre 'Application.main()\'*\
-    > **
+-   Ouvrez Projet07Application.java, faites un clic droit → ***Exécuter Votre 'Projet07Application.main()\'***
 
 -   Une fois lancé, ouvrez le navigateur à [http://localhost:8080](http://localhost:8080)
 
 ### 🌈 Eclipse
 
--   Ouvrez Eclipse , puis allez vers ***Fichier → Importer → Maven →
-    > Projets Maven existants*\
-    > **
+-   Ouvrez Eclipse , puis allez vers ***Fichier → Importer → Maven → Projets Maven existants***
 
--   Sélectionnez le dossier Projet7_2CP/TacticScopeTool/Projet07
+-   Sélectionnez le dossier ***Projet7_2CP/TacticScopeTool/Projet07***
 
 -   Cliquez sur ***Terminer***, puis attendez la fin du chargement.
 
--   Faites un clic droit sur Projet07Application.java → ***Exécuter en
-    > tant que → Application Java*\
-    > **
+-   Faites un clic droit sur Projet07Application.java → ***Exécuter en tant que → Application Java***
 
 -   Accédez à : [http://localhost:8080](http://localhost:8080)
 
@@ -76,8 +68,7 @@ Avant de commencer, veuillez installer :
 
 -   Assurez-vous que l\'extension **Java Extension Pack** est installée.
 
--   VS Code vous proposera d'importer le projet Maven. Cliquez sur
-    > ***Importer***
+-   VS Code vous proposera d'importer le projet Maven. Cliquez sur ***Importer***
 
 -   Ouvrez VotreApplication.java → Cliquez sur **Exécuter**
 
@@ -87,15 +78,15 @@ Avant de commencer, veuillez installer :
 
 ### 🪟 Windows
 
-Vous pouvez utiliser les terminaux cmd, PowerShell ou le Git bash
+> Vous pouvez utiliser les terminaux cmd, PowerShell ou le Git bash
 
 -   Dans le terminal, entrez dans le dossier du projet
 
 ```bash
-cd path_of_Downloads/Projet7_2CP/TacticScopeTool/Projet07
+cd path_to_Downloads/Projet7_2CP/TacticScopeTool/Projet07
 ```
 
--   Lancer la commande mvnw.cmd spring-boot:run
+-   Lancer la commande suivante
 
 ```bash
 mvnw.cmd spring-boot:run
@@ -111,10 +102,10 @@ mvnw.cmd spring-boot:run
 -   Dans le terminal, entrez dans le dossier du projet
 
 ```bash
-cd path_of_Downloads/Projet7_2CP/TacticScopeTool/Projet07
+cd path_to_Downloads/Projet7_2CP/TacticScopeTool/Projet07
 ```
 
--   Lancer la commande mvnw.cmd spring-boot:run
+-   Lancer la commande suivante
 
 ```bash
 mvnw.cmd spring-boot:run
@@ -128,14 +119,14 @@ mvnw.cmd spring-boot:run
 -   Dans le terminal, entrez dans le dossier du projet
 
 ```bash
-cd path_of_Downloads/Projet7_2CP/TacticScopeTool/Projet07
+cd path_to_Downloads/Projet7_2CP/TacticScopeTool/Projet07
 ```
 
--   Lancer la commande mvnw.cmd spring-boot:run
+-   Lancer la commande suivante
 
 ```bash
 mvnw.cmd spring-boot:run
 ```
 
 -   Une fois le serveur démarré avec succès, ouvrez l'application web
-    via navigateur à l\'adresse http://localhost:8080
+   > via navigateur à l\'adresse http://localhost:8080
