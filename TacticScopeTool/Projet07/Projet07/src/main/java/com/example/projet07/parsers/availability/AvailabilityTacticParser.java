@@ -253,10 +253,9 @@ public class AvailabilityTacticParser implements AvailabilityTacticParserConstan
         for (int i = 0; i < TotalOccurrences.size(); i++) {
             StringBuilder contentBuilder = new StringBuilder();
             Occurrence occ = TotalOccurrences.get(i);
-            contentBuilder.append("Occurrence ").append(i + 1).append(":\n\n");
-            contentBuilder.append("PingSender Entity: ").append(occ.SenderEntity).append("\n");
-            contentBuilder.append("FaultMonitor Entity: ").append(occ.MonitorEntity).append("\n");
-            contentBuilder.append("PingReceiver Entity: ").append(occ.ReceiverEntity).append("\n");
+            contentBuilder.append("PingSender ").append(occ.SenderEntity).append("\n");
+            contentBuilder.append("FaultMonitor  ").append(occ.MonitorEntity).append("\n");
+            contentBuilder.append("PingReceiver  ").append(occ.ReceiverEntity).append("\n");
 
             int line = occ.startPosition;
             contentBuilder.append("\nStarting line ").append(++line).append("\n\n");

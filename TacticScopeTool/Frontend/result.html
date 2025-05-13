@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+        <title>tool</title>
+        <link rel="icon" type="image/png" href="/icons/tactcope.svg">
+        <link rel="stylesheet" href="/css/tool.css">
+        <link rel="stylesheet" href="/css/sidebar.css">
+        <link rel="stylesheet" href="/css/footer.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+
+        <title>Analysis Result</title>
+        <link rel="stylesheet" href="/css/sidebar.css">
+        <link rel="stylesheet" href="/css/footer.css">
+        <link rel="stylesheet" href="/css/result-page.css">
+        <link>
+</head>
+<body>
+<div class="container">
+    <h1>Analysis Report</h1>
+
+    <section class="tactic-overview">
+        <h2 id="tactic-name">Tactic Name</h2>
+        <p><strong>Goal:</strong> <span id="tactic-goal"></span></p>
+        <p><strong>Occurrences Detected:</strong> <span id="occurrence-count"></span></p>
+    </section>
+
+    <section class="tactic-impacts">
+        <h3>Impacts</h3>
+        <ul id="impact-list"></ul>
+    </section>
+
+    <section id="occurrence-list"></section>
+
+    <div class="action-buttons">
+        <label for="export-type">Export as:</label>
+        <select id="export-type">
+            <option value="json">JSON</option>
+            <option value="txt">Text (.txt)</option>
+        </select>
+        <button class="export-btn">Export Report</button>
+        <button class="get-analysis-btn">Get New Analysis</button>
+    </div>
+</div>
+
+<script src="/js/results.js"></script>
+<script src="/js/sidebar.js"></script>
+<script src="/js/footer.js"></script>
+
+</body>
+</html>

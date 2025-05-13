@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+.navbar {
+    background-color: #052742;
+    position: fixed;
+    display: flex;
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center;
+    height: 60px; 
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: 0;
+    
+    
+}
+
+/* List style for the nav */
+.nav-list {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    justify-content: flex-start; /* Align items to the left */
+    margin-left: auto;
+    transform: translateX(-8%); /* Move the entire nav list to the left (adjust percentage as needed) */
+}
+
+/* Styling for each nav item */
+.nav-list .nav-item a {
+    font-family: 'Lato', sans-serif;
+    color: white;
+    text-decoration: none;
+    padding: 8px 10px;
+    font-weight: 550;
+    font-size: 18px;
+    line-height: 22px;
+    display: block;
+    transition: transform 0.4s ease, opacity 0.4s ease, color 0.3s ease, text-decoration 0.3s ease;
+}
+
+/* Hover effect on nav items */
+.nav-list .nav-item a:hover {
+    color: #DFA449; /* Yellow color on hover */
+    text-decoration: underline; /* Underline effect on hover */
+}
+
+/* Active link state */
+.nav-link.active {
+    color: #DFA449;
+}
+
+/* Specific nav items styles */
+.nav-item.home a {
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.nav-item.faq a, .nav-item.tool a, .nav-item.documentation a, .nav-item.contact-us a {
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    color: white;
+}
+
+/* Contact Us item */
+.nav-item.contact-us {
+    width: auto;
+    white-space: nowrap; /* Prevent text from breaking into two lines */
+}
+
+.nav-item.contact-us a {
+    color: white;
+    letter-spacing: 0.5px; /* Optional: add space between letters */
+}
+
+/* Navbar section for home item */
+.nav-item.home {
+    margin-left: 0; /* No margin for Home */
+}
+
+/* Styling for FAQ item */
+.nav-item.faq {
+    width: 67px;
+}
+
+/* Styling for Tool item */
+.nav-item.tool {
+    width: 63px;
+}
+
+/* Styling for Documentation item */
+.nav-item.documentation {
+    width: 180px;
+}
+.navbar .nav-list .nav-item .nav-link.active {
+    color: #DFA449 !important; /* Yellow color for active link with !important to ensure it applies */
+    font-weight: 700; /* Optional: make active link bold */
+}
+
+
+
+
+
+
+

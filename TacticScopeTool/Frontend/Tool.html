@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <title>tool</title>
+    <link rel="icon" type="image/png" href="/icons/tactcope.svg">
+    <link rel="stylesheet" href="./css/tool.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+</head>
+
+
+
+<body>
+
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="menu-toggle">&#9776;</div>
+</nav>
+
+
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="top-row">
+            <a href="Tool.html" class="logo-container">
+                <img src="/image/tactcope.svg" alt="TactScope Logo" class="sidebar-logo" >
+                <img src="/image/logoname.svg" alt="TactScope Name" class="sidebar-name" >
+            </a>
+            <span class="close-btn" id="closeBtn"><img src="/image/4layers-icon.png" height="25" width="25"></span>
+        </div>
+        <h1 class="history-title">History</h1>
+        <div class="search-box">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="5" cy="5" r="3"></circle>
+                <line x1="15" y1="15" x2="9" y2="9"></line>
+            </svg>
+            <input type="text" placeholder="Search" />
+        </div>
+    </div>
+
+    <strong>Performance</strong>
+    <ul id="performanceList" class="history-list">
+        <li class="empty-msg">No previous analysis</li>
+    </ul>
+
+    <strong>Security</strong>
+    <ul id="securityList" class="history-list">
+        <li class="empty-msg">No previous analysis</li>
+    </ul>
+
+    <strong>Availability</strong>
+    <ul id="availabilityList" class="history-list">
+        <li class="empty-msg">No previous analysis</li>
+    </ul>
+</div>
+
+
+<main id="main-content">
+    <div class="trace-analysis-box">
+        <div class="tool">
+            <div class="description">
+                <img src="/image/trace-analysis.png">
+                <p>Start analyzing your codes and know which tactics are implemented !</p>
+            </div>
+            <div class="button-wrapper">
+                <button class="upload-btn" id="uploadBtn">
+                    <img id="uploadIcon" src="/icons/upload-icon.png" class="upload-icon" width="25" height="25" alt="an upload icon">
+                    <span id="spinner" class="spinner hidden"></span>
+                    <span id="btnText">&nbsp;&nbsp;Upload a file</span>
+                </button>
+            </div>
+        </div>
+        <div class="process">
+
+
+            <!-- Bloc d'erreur de l'upload (initialement caché) -->
+            <div id="uploadWentWrong" class="upload-success hidden">
+                <h2>
+                    <img id="uploaded-wrong" src="/icons/error-upload.png" class="upload-icon" width="20" height="20" alt="a red x inside a circle">
+                    File Not uploaded
+                </h2>
+
+                <p>The file is too large. Please upload a smaller file (max: 1 MB) and try again.</p>
+            </div>
+            <div id="uploadSyntaxError" class="upload-success hidden">
+                <h2>
+                    <img src="/icons/error-upload.png" class="upload-icon" width="20" height="20" alt="error icon">
+                    Invalid Syntax
+                </h2>
+                <p>The uploaded file has invalid syntax. Please follow the expected format.</p>
+            </div>
+
+            <!-- Bloc de confirmation upload (initialement caché) -->
+            <div id="uploadSuccess" class="upload-success hidden">
+                <h2>
+                    <img id="uploaded-success" src="/icons/success-upload.png" class="upload-icon" width="20" height="20" alt="a nike like green icon">
+                    File uploaded !
+                </h2>
+
+                <p>Your file has been uploaded successfully, Click below to <span class="highlight">choose a tactic</span> and start analysis :</p>
+                <div class="tactic-buttons">
+                    <button class="tactic-btn">PingEcho</button>
+                    <button class="tactic-btn">Maintain Multiple Copies</button>
+                    <button class="tactic-btn">ID Password/Maintain Data Confidentiality</button>
+                </div>
+                <button class="start-analysis-btn">Start Analysis</button>
+            </div>
+
+            <div class="note-box">
+                <div class="note-logo">
+                    <img src="/icons/exclamation.png" alt="note icon">
+                    <span>Note</span>
+                </div>
+                <p class="text">to analyze your trace and get reliable results, consider following this syntax:</p>
+                <p class="syntax">
+                    <span class="highlight">CALLER</span>:object, <span class="highlight">METHOD</span>:method, <span class="highlight">CALEE</span>:object;
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div class="logo">
+        <a  href="index.html">
+            <img src="/image/logo-complet.png">
+        </a>
+    </div>
+</main>
+<input type="file" id="fileInput" style="display: none;" accept=".txt">
+<div id="footer-container"></div>
+<script src="/js/sidebar.js"></script>
+<script src="/js/upload-button.js"></script>
+<script src="/js/footer.js"></script>
+
+</body>
+
+
+</html>

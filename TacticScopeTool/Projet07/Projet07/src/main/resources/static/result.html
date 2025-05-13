@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <title>result page</title>
+    <link rel="icon" type="image/png" href="./assets/image/tactcope.svg">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="./css/result-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="menu-toggle">&#9776;</div>
+</nav>
+
+
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="top-row">
+            <a href="Tool.html" class="logo-container">
+                <img src="../assets/image/tactcope.svg" alt="TactScope Logo" class="sidebar-logo" >
+                <img src="../assets/image/logoname.svg" alt="TactScope Name" class="sidebar-name" >
+            </a>
+            <spanimg class="close-btn" id="closeBtn"><img src="../assets/icons/4layers-icon.png" height="25" width="25"></span>
+        </div>
+        <h1 class="history-title">History</h1>
+    </div>
+
+        <h3>Performance</h3>
+        <ul id="performanceList"></ul>
+
+        <h3>Security</h3>
+        <ul id="securityList"></ul>
+
+        <h3>Availability</h3>
+        <ul id="availabilityList"></ul>
+
+
+</div>
+
+<main id="main-content">
+    <div class="description">
+
+        <div class="results">
+
+            <img src="./assets/image/results-icon.svg">
+            <!-- Tactic Overview -->
+            <div class="tactic-overview">
+                <h2>Tactic Overview</h2>
+               <div class="tactic-name">
+                   <strong >Tactic name &nbsp;&nbsp; </strong>
+                   <span id="tactic-name"></span>
+               </div>
+                <div class="tactic-goal">
+                    <strong >Goal &nbsp; &nbsp; &nbsp;&nbsp;</strong>
+                    <span id="tactic-goal"></span>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="logo">
+            <a  href="index.html">
+                <img src="./assets/image/logo-complet.svg" alt="">
+            </a>
+        </div>
+        </div>
+
+    <div class="detection-section">
+        <!-- Detection Summary -->
+        <section class="detection-summary">
+            <h2>Detection Summary</h2>
+            <p><strong>Frequency&nbsp;&nbsp;</strong> <span id="occurrence-count">0</span> Times</p>
+            <div id="occurrence-list" class="occurrence-list"></div>
+        </section>
+    </div>
+    <div class="imp-exp">
+
+        <!--Impact -->
+        <section class="impact">
+            <h2>Impact</h2>
+            <ul id="impact-list"></ul>
+        </section>
+
+        <!-- Export -->
+        <section class="export">
+            <h2>Export</h2>
+
+            <div class="export-controls">
+                <label for="export-type" class="export-label">Export as: &nbsp; &nbsp;</label>
+                <select id="export-type" class="custom-select">
+                    <option value="json">JSON</option>
+                    <option value="txt">.TXT</option>
+                </select>
+            </div>
+
+            <div class="export-buttons">
+                <button class="export-btn">Export</button>
+                <button id="get-new-analysis" class="get-analysis-btn">
+                    Get New Analysis <span class="arrow">&rarr;</span>
+                </button>
+            </div>
+        </section>
+    </div>
+
+</main>
+
+<div id="footer-container"></div>
+
+<!-- JS for dynamic content -->
+
+
+<script src="./js/results.js"></script>
+<script src="./js/sidebar.js"></script>
+<script src="./js/footer.js"></script>
+</body>
+</html>
+

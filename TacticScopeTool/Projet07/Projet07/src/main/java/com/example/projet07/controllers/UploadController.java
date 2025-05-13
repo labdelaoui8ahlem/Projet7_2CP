@@ -24,6 +24,8 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/Tool")
+@CrossOrigin(origins = "http://localhost:8080")  // Add this line
+
 public class UploadController {
 
     private final ParserService parserService;

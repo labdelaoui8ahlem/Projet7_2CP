@@ -186,11 +186,10 @@ public class PerformanceTacticParser implements PerformanceTacticParserConstants
         for (int i = 0; i < TotalOccurrences.size(); i++) {
             StringBuilder contentBuilder = new StringBuilder();
             Occurrence occ = TotalOccurrences.get(i);
-            contentBuilder.append("Occurrence ").append(i + 1).append(":\n\n");
-            contentBuilder.append("Client Entity: ").append(occ.ClientEntity).append("\n");
-            contentBuilder.append("CacheMgr Entity: ").append(occ.MgrEntity).append("\n");
-            contentBuilder.append("Cache Entity: ").append(occ.CacheEntity).append("\n");
-            contentBuilder.append("Repository Entity: ").append(occ.RepoEntity).append("\n");
+            contentBuilder.append("Client  ").append(occ.ClientEntity).append("\n");
+            contentBuilder.append("CacheMgr ").append(occ.MgrEntity).append("\n");
+            contentBuilder.append("Cache ").append(occ.CacheEntity).append("\n");
+            contentBuilder.append("Repository ").append(occ.RepoEntity).append("\n");
 
             int line = occ.startPosition;
             contentBuilder.append("\nStarting line ").append(++line).append("\n\n");
